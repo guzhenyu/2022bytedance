@@ -10,6 +10,5 @@ type HelloImpl struct{}
 
 // Echo implements the HelloImpl interface.
 func (s *HelloImpl) Echo(ctx context.Context, req *api.Request) (resp *api.Response, err error) {
-	
-	return
+	return &api.Response{Message: "[resp]" + req.Message}, nil
 }

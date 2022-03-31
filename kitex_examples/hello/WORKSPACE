@@ -1,0 +1,180 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "io_bazel_rules_go",
+    sha256 = "f2dcd210c7095febe54b804bb1cd3a58fe8435a909db2ec04e31542631cf715c",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.31.0/rules_go-v0.31.0.zip",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.31.0/rules_go-v0.31.0.zip",
+    ],
+)
+
+http_archive(
+    name = "bazel_gazelle",
+    sha256 = "de69a09dc70417580aabf20a28619bb3ef60d038470c7cf8442fafcf627c21cb",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.24.0/bazel-gazelle-v0.24.0.tar.gz",
+        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.24.0/bazel-gazelle-v0.24.0.tar.gz",
+    ],
+)
+
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
+
+# 缺BUILD，所以才用http_archieve，在com_google_protobuf中用到
+# go_repository(
+#     name = "zlib",
+#     importpath = "github.com/madler/zlib",
+#     sum = "h1:qdF6e/ssLdVcpRLzhOxQ+bMvkbFbU4eiZjNj1MkJiXI=",
+#     version = "v1.2.12",
+# )
+
+http_archive(
+    name = "zlib",
+    build_file = "@com_google_protobuf//:third_party/zlib.BUILD",
+    sha256 = "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1",
+    strip_prefix = "zlib-1.2.11",
+    urls = [
+        "https://mirror.bazel.build/zlib.net/zlib-1.2.11.tar.gz",
+        "https://zlib.net/zlib-1.2.11.tar.gz",
+    ],
+)
+
+go_repository(
+    name = "com_github_guzhenyu_2022bytedance",
+    importpath = "github.com/guzhenyu/2022bytedance",
+    sum = "h1:Q1XhGx2YY3F18wx8+QHhxURD8oQQA+iKXycWZfRdbyQ=",
+    version = "v0.0.0-20220331114410-7d38a5c722d8",
+)
+
+go_repository(
+    name = "com_github_cloudwego_kitex",
+    importpath = "github.com/cloudwego/kitex",
+    sum = "h1:yT5bkUPf59WLnT+4OSoBLfIFOVb1BFOQY93kWIS9e+4=",
+    version = "v0.2.1",
+)
+
+go_repository(
+    name = "com_github_bytedance_gopkg",
+    importpath = "github.com/bytedance/gopkg",
+    sum = "h1:vAQOnKBw5fu98b8699GmBA64FpJ/8+2qOTEvi3mMsME=",
+    version = "v0.0.0-20220323131554-0b4f2389f429",
+)
+
+go_repository(
+    name = "in_gopkg_yaml_v3",
+    importpath = "gopkg.in/yaml.v3",
+    sum = "h1:h8qDotaEPuJATrMmW04NCwg7v22aHH28wwpauUhK9Oo=",
+    version = "v3.0.0-20210107192922-496545a6307b",
+)
+
+go_repository(
+    name = "com_github_choleraehyq_pid",
+    importpath = "github.com/choleraehyq/pid",
+    sum = "h1:Tc/jYjHC50SDCxSX+DWHfMmFqtwGR8EiQ08qJ/EK8zs=",
+    version = "v0.0.13",
+)
+
+go_repository(
+    name = "com_github_cloudwego_thriftgo",
+    importpath = "github.com/cloudwego/thriftgo",
+    sum = "h1:mTGRv6Dtwfp0hTPZXuIHwm3vtGOuZVTrWarI0xVzUYg=",
+    version = "v0.1.7",
+)
+
+go_repository(
+    name = "com_github_cespare_xxhash",
+    importpath = "github.com/cespare/xxhash",
+    sum = "h1:a6HrQnmkObjyL+Gs60czilIUGqrzKutQD6XZog3p+ko=",
+    version = "v1.1.0",
+)
+
+go_repository(
+    name = "com_github_cloudwego_netpoll_http2",
+    importpath = "github.com/cloudwego/netpoll-http2",
+    sum = "h1:+jdkMKGj7ifRqWOdyT/hqzhXklmqh/H4lyOdrAVkI/U=",
+    version = "v0.0.6",
+)
+
+go_repository(
+    name = "com_github_cloudwego_netpoll",
+    importpath = "github.com/cloudwego/netpoll",
+    sum = "h1:vr9A9UszvK05MtYe4RsFxVD88WgX4UE0XZHDTFvbvpQ=",
+    version = "v0.2.1",
+)
+
+go_repository(
+    name = "com_github_json_iterator_go",
+    importpath = "github.com/json-iterator/go",
+    sum = "h1:PV8peI4a0ysnczrg+LtxykD8LfKY9ML6u2jnxaEnrnM=",
+    version = "v1.1.12",
+)
+
+go_repository(
+    name = "com_google_protobuf",
+    importpath = "github.com/protocolbuffers/protobuf",
+    sum = "h1:dvsi/LEZ6yertoznKA6YNDSUWQrT9LL4gagjwvfK4dw=",
+    version = "v3.20.0+incompatible",
+)
+
+go_repository(
+    name = "com_github_modern_go_reflect2",
+    importpath = "github.com/modern-go/reflect2",
+    sum = "h1:xBagoLtFs94CBntxluKeaWgTMpvLxC4ur3nMaC9Gz0M=",
+    version = "v1.0.2",
+)
+
+go_repository(
+    name = "com_github_modern_go_concurrent",
+    importpath = "github.com/modern-go/concurrent",
+    sum = "h1:TRLaZ9cD/w8PVh93nsPXa1VrQ6jlwL5oN8l14QlcNfg=",
+    version = "v0.0.0-20180306012644-bacd9c7ef1dd",
+)
+
+go_repository(
+    name = "com_github_tidwall_gjson",
+    importpath = "github.com/tidwall/gjson",
+    sum = "h1:6aeJ0bzojgWLa82gDQHcx3S0Lr/O51I9bJ5nv6JFx5w=",
+    version = "v1.14.0",
+)
+
+go_repository(
+    name = "com_github_tidwall_match",
+    importpath = "github.com/tidwall/match",
+    sum = "h1:+Ho715JplO36QYgwN9PGYNhgZvoUSc9X2c80KVTi+GA=",
+    version = "v1.1.1",
+)
+
+go_repository(
+    name = "rules_pkg",
+    importpath = "github.com/bazelbuild/rules_pkg",
+    sum = "h1:9sMYdCQioSuHMHpVIrkv/cXc3yFmIEfsclnN2GyDzGk=",
+    version = "v0.0.0-20220329214757-24830c52a9d4",
+)
+
+go_repository(
+    name = "rules_python",
+    importpath = "github.com/bazelbuild/rules_python",
+    sum = "h1:wu4ZEFEvs/UTJQ2GBbxvg4STOxXbKP4ElshYDmnDx5s=",
+    version = "v0.7.0",
+)
+
+go_repository(
+    name = "com_github_tidwall_pretty",
+    importpath = "github.com/tidwall/pretty",
+    sum = "h1:RWIZEg2iJ8/g6fDDYzMpobmaoGh5OLl4AXtGUGPcqCs=",
+    version = "v1.2.0",
+)
+
+go_repository(
+    name = "com_github_apache_thrift",
+    importpath = "github.com/apache/thrift",
+    sum = "h1:5hryIiq9gtn+MiLVn0wP37kb/uTeRZgN08WoCsAhIhI=",
+    version = "v0.13.0",
+)
+
+go_rules_dependencies()
+
+go_register_toolchains(version = "1.18")
+
+gazelle_dependencies()
