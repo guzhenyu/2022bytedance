@@ -53,3 +53,15 @@ kitex框架
 > $ ls
 > hello.thrift  kitex_gen
 > $ cd ../..; git add kitex_overpass; git commit -m "添加一个kitex服务 - hello"; git push origin master
+
+## 5. 生成服务端代码
+> $ cd /Users/guzhenyu/github/2022bytedance
+> $ mkdir -p kitex_examples/hello;cd kitex_examples/hello
+> $ go mod init github.com/guzhenyu/2022bytedance/kitex_examples/hello
+> $ vi handler.go;...; vi hello_server.go; ...
+> $ go mod tidy
+
+> // Do not forget to setup the thrift version
+> $ go mod edit -droprequire=github.com/apache/thrift/lib/go/thrift
+> $ go mod edit -replace=github.com/apache/thrift=github.com/apache/thrift@v0.13.0
+> $ go build -o a.b.hello_server
