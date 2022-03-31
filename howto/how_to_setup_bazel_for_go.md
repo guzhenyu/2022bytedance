@@ -47,13 +47,13 @@
 > load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")  
 > load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")  
 >   
-> # 缺BUILD，所以才用http_archieve，在com_google_protobuf中用到  
-> # go_repository(  
-> #     name = "zlib",  
-> #     importpath = "github.com/madler/zlib",  
-> #     sum = "h1:qdF6e/ssLdVcpRLzhOxQ+bMvkbFbU4eiZjNj1MkJiXI=",  
-> #     version = "v1.2.12",  
-> # )  
+> \# 缺BUILD，所以才用http_archieve，在com_google_protobuf中用到  
+> \# go_repository(  
+> \#     name = "zlib",  
+> \#     importpath = "github.com/madler/zlib",  
+> \#     sum = "h1:qdF6e/ssLdVcpRLzhOxQ+bMvkbFbU4eiZjNj1MkJiXI=",  
+> \#     version = "v1.2.12",  
+> \# )  
 >   
 > http_archive(  
 >     name = "zlib",  
@@ -78,10 +78,10 @@
 > 在BUILD文件首行添加  
 > load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")  
 
-3.2 已有go.mod 的project，在WORKSPACE对应的目录下设置正确的BUILD文件，"# gazelle:prefix github.com/example/project" 不是注释!!! 是gazelle的输入!!!  
+3.2 已有go.mod 的project，在WORKSPACE对应的目录下设置正确的BUILD文件，"\# gazelle:prefix github.com/example/project" 不是注释!!! 是gazelle的输入!!!  
 > $ vi BUILD  
 > load("@bazel_gazelle//:def.bzl", "gazelle")    
-> # gazelle:prefix github.com/guzhenyu/2022bytedance/kitex_examples/hello    
+> \# gazelle:prefix github.com/guzhenyu/2022bytedance/kitex_examples/hello    
 > gazelle(name = "gazelle")    
 >  
 > $ bazel run :gazelle  
@@ -109,9 +109,9 @@
 > $ bazel run :gazelle update-repos github.com/bazelbuild/rules_python  
 >  
 > $ vi WORKSPACE  
-> # 将com_github_protocolbuffers_protobuf改名为com_google_protobuf  
-> # 将com_github_bazelbuild_rules_pkg改名为rules_pkg  
-> # 将com_github_bazelbuild_rules_pkg改名为rules_python  
+> \# 将com_github_protocolbuffers_protobuf改名为com_google_protobuf  
+> \# 将com_github_bazelbuild_rules_pkg改名为rules_pkg  
+> \# 将com_github_bazelbuild_rules_pkg改名为rules_python  
 
 4. 编译  
 > $ cd /Users/guzhenyu/github/2022bytedance/kitex_examples/hello
