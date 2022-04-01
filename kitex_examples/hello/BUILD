@@ -4,31 +4,24 @@ load("@bazel_gazelle//:def.bzl", "gazelle")
 # gazelle:prefix github.com/guzhenyu/2022bytedance/kitex_examples/hello
 gazelle(name = "gazelle")
 
-go_library(
-    name = "hello_lib",
+go_binary(
+    name = "hello_server",
     srcs = [
         "handler.go",
         "hello_server.go",
     ],
+    deps = [
+        "//calc:calc_lib",
+        "@com_github_guzhenyu_2022bytedance//kitex_overpass/hello/kitex_gen/api",
+        "@com_github_guzhenyu_2022bytedance//kitex_overpass/hello/kitex_gen/api/hello",
+    ],
     importpath = "github.com/guzhenyu/2022bytedance/kitex_examples/hello",
     visibility = ["//visibility:private"],
-    deps = [
-        "@com_github_guzhenyu_2022bytedance//kitex_overpass/hello/kitex_gen/api:go_default_library",
-        "@com_github_guzhenyu_2022bytedance//kitex_overpass/hello/kitex_gen/api/hello:go_default_library",
-    ],
-)
-
-go_binary(
-    name = "hello_server",
-    embed = [":hello_lib"],
-    visibility = ["//visibility:public"],
 )
 
 go_binary(
     name = "hello_client",
-    srcs = [
-        "hello_client.go",
-    ],
+    srcs = ["hello_client.go"],
     importpath = "github.com/guzhenyu/2022bytedance/kitex_examples/hello",
     visibility = ["//visibility:public"],
     deps = [

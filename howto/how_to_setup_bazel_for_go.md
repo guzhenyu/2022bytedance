@@ -112,8 +112,20 @@
 > \# 将com_github_protocolbuffers_protobuf改名为com_google_protobuf  
 > \# 将com_github_bazelbuild_rules_pkg改名为rules_pkg  
 > \# 将com_github_bazelbuild_rules_pkg改名为rules_python  
+>
+> // 测试包  
+> $ bazel run :gazelle update-repos github.com/stretchr/testify
 
 4. 编译  
 > $ cd /Users/guzhenyu/github/2022bytedance/kitex_examples/hello
 > $ bazel build :hello_server
 > $ bazel build :hello_client
+
+5. mockgen
+https://docs.bazel.build/versions/main/skylark/concepts.html
+https://docs.bazel.build/versions/main/skylark/rules.html
+https://github.com/jmhodges/bazel_gomock/blob/master/gomock.bzl : _gomock_source
+https://docs.bazel.build/versions/main/skylark/lib/skylark-overview.html
+
+https://github.com/golang/mock
+> $ go install github.com/golang/mock/mockgen@v1.6.0

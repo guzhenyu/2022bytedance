@@ -41,13 +41,6 @@ http_archive(
 )
 
 go_repository(
-    name = "com_github_guzhenyu_2022bytedance",
-    importpath = "github.com/guzhenyu/2022bytedance",
-    sum = "h1:Q1XhGx2YY3F18wx8+QHhxURD8oQQA+iKXycWZfRdbyQ=",
-    version = "v0.0.0-20220331114410-7d38a5c722d8",
-)
-
-go_repository(
     name = "com_github_cloudwego_kitex",
     importpath = "github.com/cloudwego/kitex",
     sum = "h1:yT5bkUPf59WLnT+4OSoBLfIFOVb1BFOQY93kWIS9e+4=",
@@ -171,6 +164,20 @@ go_repository(
     importpath = "github.com/apache/thrift",
     sum = "h1:5hryIiq9gtn+MiLVn0wP37kb/uTeRZgN08WoCsAhIhI=",
     version = "v0.13.0",
+)
+
+go_repository(
+    name = "com_github_stretchr_testify",
+    importpath = "github.com/stretchr/testify",
+    sum = "h1:5TQK59W5E3v0r2duFAb7P95B6hEeOyEnHRa8MjYSMTY=",
+    version = "v1.7.1",
+)
+
+go_repository(
+    name = "com_github_guzhenyu_2022bytedance",
+    importpath = "github.com/guzhenyu/2022bytedance",
+    sum = "h1:ZlfFcMThXw80rB9Jh0tjUQ+820mwdDC5f+qr80R8TFw=",
+    version = "v0.0.0-20220401030554-efeceaceaecf",
 )
 
 go_rules_dependencies()
