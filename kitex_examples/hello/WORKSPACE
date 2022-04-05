@@ -29,6 +29,8 @@ load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
 #     version = "v1.2.12",
 # )
 
+# Mark Adler 没有定义bazel用的BUILD, com_google_protobuf中配了一个BUILD(和go无关)
+# go_repository中用BUILD文件不好使，因此抄了一个网上的例子
 http_archive(
     name = "zlib",
     build_file = "@com_google_protobuf//:third_party/zlib.BUILD",
@@ -178,6 +180,13 @@ go_repository(
     importpath = "github.com/guzhenyu/2022bytedance",
     sum = "h1:ZlfFcMThXw80rB9Jh0tjUQ+820mwdDC5f+qr80R8TFw=",
     version = "v0.0.0-20220401030554-efeceaceaecf",
+)
+
+go_repository(
+    name = "com_github_golang_mock",
+    importpath = "github.com/golang/mock",
+    sum = "h1:ErTB+efbowRARo13NNdxyJji2egdxLGQhRaY+DUumQc=",
+    version = "v1.6.0",
 )
 
 go_rules_dependencies()

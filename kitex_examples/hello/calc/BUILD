@@ -1,4 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("//:gomock.bzl", "gomock")
 
 go_library(
     name = "calc_lib",
@@ -13,6 +14,19 @@ go_test(
     embed = [":calc_lib"],
 )
 
+gomock(
+    name = "mock_calc",
+    out = "mock_calc.go",
+    library = ":calc_lib",
+    interfaces = ["Calc"],
+    # package = "CalcX",
+)
+
+# load("//:gen_mock.bzl", "gen_mock2")
+# gen_mock2(
+#     name = "abc",
+#     out = "go_env.txt",
+# )
 # genrule(
 #     name = "gen_mock_calc",
 #     srcs = ["calc.go"],

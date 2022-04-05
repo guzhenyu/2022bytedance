@@ -121,11 +121,35 @@
 > $ bazel build :hello_server
 > $ bazel build :hello_client
 
-5. mockgen
-https://docs.bazel.build/versions/main/skylark/concepts.html
-https://docs.bazel.build/versions/main/skylark/rules.html
-https://github.com/jmhodges/bazel_gomock/blob/master/gomock.bzl : _gomock_source
-https://docs.bazel.build/versions/main/skylark/lib/skylark-overview.html
+5. mockgen  
+命令行模式下生成mock的方式  
+https://github.com/golang/mock  
+> $ go install github.com/golang/mock/mockgen@v1.6.0  
+> $ mockgen 
 
-https://github.com/golang/mock
-> $ go install github.com/golang/mock/mockgen@v1.6.0
+但是在Bazel的执行阶段, 除了要准备被mock的文件，mockgen工具也需要被准备好呀  
+
+5.1 在bazel中配置mockgen  
+5.1.1 获取mockgen的sum  
+> $ go mod download -json github.com/golang/mock@v1.6.0  
+> {  
+> 	"Path": "github.com/golang/mock",  
+> 	"Version": "v1.6.0",  
+> 	"Info": "/Users/guzhenyu/go/pkg/mod/cache/download/github.com/golang/mock/@v/v1.6.0.info",  
+> 	"GoMod": "/Users/guzhenyu/go/pkg/mod/cache/download/github.com/golang/mock/@v/v1.6.0.mod",  
+> 	"Zip": "/Users/guzhenyu/go/pkg/mod/cache/download/github.com/golang/mock/@v/v1.6.0.zip",  
+> 	"Dir": "/Users/guzhenyu/go/pkg/mod/github.com/golang/mock@v1.6.0",  
+> 	"Sum": "h1:ErTB+efbowRARo13NNdxyJji2egdxLGQhRaY+DUumQc=",  
+> 	"GoModSum": "h1:p6yTPP+5HYm5mzsMV8JkE6ZKdX+/wYM6Hr+LicevLPs="  
+> }  
+5.1.2 在WORKSPACE中配置go_repository  
+> go_repository(  
+>     name = "com_github_golang_mock",  
+>     importpath = "github.com/golang/mock",  
+>     sum = "h1:ErTB+efbowRARo13NNdxyJji2egdxLGQhRaY+DUumQc="  
+>     version = "v1.6.0"  
+> )  
+  
+5.1.2 配置bazel macro, 用于生成gomock  
+参考https://github.com/jmhodges/bazel_gomock, 新建kitex_examples/hello/gomock.bzl  
+> $ bazel build calc:mock_calc
